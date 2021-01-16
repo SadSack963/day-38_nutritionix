@@ -66,6 +66,6 @@ def get_exercises():
     }
     """
 
-    list_exercises = dict(response.json())["exercises"]
+    list_exercises = response.json()["exercises"]
 
     return list_exercises

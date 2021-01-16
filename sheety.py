@@ -13,7 +13,8 @@ SHEET = "workouts"
 
 def post_new_row(exercise, duration, calories):
     date = dt.datetime.now().strftime("%d/%m/%Y")
-    time = dt.datetime.now().strftime("%H:%M:%S")
+    time_iso = dt.datetime.now().time()
+    time = ((time_iso.hour + ((time_iso.minute + (time_iso.second / 60.0)) / 60.0)) / 24.0)
 
     base_url = "https://api.sheety.co"
     endpoint_url = f"/{USERNAME}/{PROJECT}/{SHEET}"
