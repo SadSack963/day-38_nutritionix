@@ -77,10 +77,51 @@ number
 (body)
 
 
+Sheety
+======
+Sheet names act as API endpoints
+    https://api.sheety.co/username/projectName/worksheet
+Singular names such as “Event” will automatically be converted to the plural “Events”.
+The sheet name will also be used as the root property in the returned JSON.
+Sheety will return your data in the same format as it’s stored in your spreadsheet.
+
+Making requests
+---------------
+base URL: https://api.sheety.co
+endpoint: /username/projectName/sheetName
+
+Getting rows
+    GET https://api.sheety.co/username/projectName/sheetName will return all records in your sheet.
+    If you want to return a specific record, append the object ID (which is just the row number) to the endpoint URL.
+    Filtering rows
+        Add query ?filter[property]=value
+        stack multiple filters by joining them with a &
+
+Add a row
+    POST https://api.sheety.co/username/projectName/sheetName
+    Set the "Content-Type" header to "application/json"
+    with the data you want to add as a JSON payload in the request body.
+    Sheety expects your record to be nested in a singular root property named after your sheet. For example if your endpoint is named emails, nest your record in a property called email.
 
 
+Edit a row
+    PUT https://api.sheety.co/username/projectName/sheetName/row
+    with the changes you want to make as a JSON payload in the request body.
 
+Delete a row
+    DELETE https://api.sheety.co/username/projectName/sheetName/row
 
+Authentication
+--------------
+By default Sheety has no authentication enabled on your API as this is usually suitable for most use cases (as long as the data isn’t sensitive!). Though any methods that edit your sheet (such as POST) are disabled by default.
+
+Basic Auth
+    With Basic Auth, a request contains a header field called Authorization, with the value set to the username and password encoded as base64. You set the username and password inside of Sheety.
+    Sheety can generate the Authorization header value for you. Find it inside Authentication settings.
+        {"Authorization": "Basic bnVsbDpudWxs"}
+
+Bearer auth
+    Bearer authentication works exactly the same as Basic auth, though instead of username and password encoded as base64, it’s simply a token (or secret) of your choosing.
 
 
 
