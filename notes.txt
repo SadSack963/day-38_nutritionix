@@ -1,0 +1,92 @@
+API Keys & Authenticating
+-------------------------
+Required HEADERS when accessing Nutritionix V2 API endpoints:
+x-app-id: Your app ID issued from developer.nutritionix.com)
+x-app-key: Your app key issued from developer.nutritionix.com)
+x-remote-user-id:  A unique identifier to represent the end-user who is accessing the Nutritionix API.  If in development mode, set this to 0.  This is used for billing purposes to determine the number of active users your app has.
+
+Food Lookup Endpoints
+---------------------
+/v2/natural/nutrients
+    Get detailed nutrient breakdown of any natural language text.  Can also be used in combination with the /search/instant endpoint to provide nutrition information for common foods.
+    Use POST
+
+/v2/search/instant
+    Populate any search interface, including autocomplete, with common foods and branded foods from Nutritionix.
+    Use GET
+
+    The results from the /v2/search/instant endpoint are separated into 3 arrays:
+        branded: results from Nutritionix.com branded food database (restaurant brands and grocery brands)
+        self: results from a user's own food log (only if header x-user-jwt is provided, otherwise this array is null)
+        common: results from Nutritionix.com common food database (curated list of averaged food items that are not brand-specific)
+    /v2/search/instant supports the following query string parameters:
+        branded:    default: True
+           boolean, determines whether to include branded foods (grocery and restaurant) in the results.
+        brand_ids:  default: null
+           array[string], accepts array of Nutritionix brand IDs to restrict search results to only include those brands.  Useful for the location endpoint
+        branded_region: default: null (all reagions)
+           integer, filters branded results to only those from a specific region.  1=US, 2=UK
+
+/v2/search/item
+    Look up the nutrition information for any branded food item by the nix_item_id (from /search/instant endpoint) or UPC scanned from a branded grocery product.
+    Use GET
+
+Exercise Endpoints
+------------------
+/v2/natural/exercise
+    Estimate calories burned for various exercises using natural language.  Developer can optionally include user demographics like age, gender, weight to make a more accurate estimate for calories burned.
+    Use POST
+
+Location Endpoint
+-----------------
+/v2/locations
+    Returns a list of restaurant locations near a lat/long coordinate. Can be used in conjunction with the search endpoint. Supports “point distance” and “bounding box” queries.
+    Use GET
+
+
+Full list of endpoints for Nutritionix API V2
+=============================================
+https://trackapi.nutritionix.com/docs/#/default/
+
+
+
+Exercise Query Parameters
+-------------------------
+x-user-jwt:     auth. Substitutable with bearer token
+string          (Enterprise only)
+(header)        - Use App ID and API Key instead
+
+query:          query to be executed against.
+string
+(body)
+
+gender:         male/female
+string
+(body)
+
+weight_kg:      weight
+number
+(body)
+
+height_cm:      height
+number
+(body)
+
+age:            age in years
+number
+(body)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
