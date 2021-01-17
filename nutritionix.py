@@ -1,12 +1,14 @@
-import os
 import requests
+import os
+from dotenv import load_dotenv
 
 
 # https://openai.com/blog/openai-api/
 
 # https://developer.nutritionix.com/docs/v2
-API_KEY = os.environ.get("APIKey_nutritionix")
-APP_ID = os.environ.get("AppID_nutritionix")
+load_dotenv("E:/Python/EnvironmentVariables/.env")
+API_KEY = os.getenv("APIKey_nutritionix")
+APP_ID = os.getenv("AppID_nutritionix")
 
 # Attribution Requirement
 print("Nutritionix Website: https://www.nutritionix.com/")
