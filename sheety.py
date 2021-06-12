@@ -40,4 +40,18 @@ def post_new_row(exercise, duration, calories):
     response = requests.post(url=url, headers=headers, json=body)
     response.raise_for_status()
     print(response.text)
+    """
+    {
+      "workout": {
+        "date": "12/06/2021",
+        "time": 0.7404513888888888,
+        "exercise": "Run",
+        "duration": 10,
+        "calories": 200,
+        "id": 28
+      }
+    }
+    """
 
+if __name__ == "__main__":
+    post_new_row("Run", 10, 200)

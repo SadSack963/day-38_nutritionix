@@ -17,8 +17,6 @@ print("Nutritionix API:     https://developer.nutritionix.com/docs/v2")
 base_url = "https://trackapi.nutritionix.com"
 
 
-# https://docs.google.com/spreadsheets/d/1b1g_IAHQhqCTf3LwyurYX_9LvCySAJVbVuITaes66Wk/edit#gid=0
-
 headers = {
     "x-app-id": APP_ID,
     "x-app-key": API_KEY,
@@ -44,7 +42,7 @@ def get_exercises():
     url = base_url + exercise_url
     response = requests.post(url=url, headers=headers, json=params)
     response.raise_for_status()
-    # print(response.text)
+    print(response.text)
 
     """
     What exercise have you done? : run 10 K
